@@ -20,14 +20,14 @@ The following snippet shows how to use the SessionOptions when creating a
 
 """
 
-from __future__ import absolute_import
+
 
 from .exception import _ExceptionUtil
 from . import internals
 from . import utils
 
 
-class SessionOptions(object):
+class SessionOptions(object, metaclass=utils.MetaClassForClassesWithEnums):
     """Options which the user can specify when creating a session.
 
     To use non-default options on a Session, create a SessionOptions instance
@@ -348,8 +348,7 @@ class SessionOptions(object):
 
     # Protect enumeration constant(s) defined in this class and in classes
     # derived from this class from changes:
-    __metaclass__ = utils.MetaClassForClassesWithEnums
-
+    
 __copyright__ = """
 Copyright 2012. Bloomberg Finance L.P.
 

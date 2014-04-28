@@ -6,7 +6,7 @@ This component implements a consumer session for getting services.
 """
 
 
-from __future__ import absolute_import
+
 
 import weakref
 import sys
@@ -100,7 +100,7 @@ class Session(AbstractSession):
                 event = Event(eventHandle, session)
                 session.__handler(event, session)
         except:
-            print >> sys.stderr, "Exception in event handler:"
+            print("Exception in event handler:", file=sys.stderr)
             traceback.print_exc(file=sys.stderr)
             os._exit(1)
 

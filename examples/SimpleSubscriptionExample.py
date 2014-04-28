@@ -39,18 +39,18 @@ def main():
     sessionOptions.setServerHost(options.host)
     sessionOptions.setServerPort(options.port)
 
-    print "Connecting to %s:%d" % (options.host, options.port)
+    print("Connecting to %s:%d" % (options.host, options.port))
 
     # Create a Session
     session = blpapi.Session(sessionOptions)
 
     # Start a Session
     if not session.start():
-        print "Failed to start session."
+        print("Failed to start session.")
         return
 
     if not session.openService("//blp/mktdata"):
-        print "Failed to open //blp/mktdata"
+        print("Failed to open //blp/mktdata")
         return
 
     security1 = "IBM US Equity"
@@ -77,9 +77,9 @@ def main():
             for msg in event:
                 if event.eventType() == blpapi.Event.SUBSCRIPTION_STATUS or \
                         event.eventType() == blpapi.Event.SUBSCRIPTION_DATA:
-                    print "%s - %s" % (msg.correlationIds()[0].value(), msg)
+                    print("%s - %s" % (msg.correlationIds()[0].value(), msg))
                 else:
-                    print msg
+                    print(msg)
             if event.eventType() == blpapi.Event.SUBSCRIPTION_DATA:
                 eventCount += 1
                 if eventCount >= options.maxEvents:
@@ -89,11 +89,11 @@ def main():
         session.stop()
 
 if __name__ == "__main__":
-    print "SimpleSubscriptionExample"
+    print("SimpleSubscriptionExample")
     try:
         main()
     except KeyboardInterrupt:
-        print "Ctrl+C pressed. Stopping..."
+        print("Ctrl+C pressed. Stopping...")
 
 __copyright__ = """
 Copyright 2012. Bloomberg Finance L.P.

@@ -6,7 +6,7 @@ This file defines a class 'AbstractSession' - an interface which is shared
 between its concrete implementations 'Session' and 'ProviderSession'.
 """
 
-from __future__ import absolute_import
+
 
 from .exception import _ExceptionUtil
 from .identity import Identity
@@ -16,7 +16,7 @@ from .internals import CorrelationId
 from . import utils
 
 
-class AbstractSession(object):
+class AbstractSession(object, metaclass=utils.MetaClassForClassesWithEnums):
     """A common interface shared between publish and consumer sessions.
 
     This class provides an abstract session which defines shared interface
@@ -256,8 +256,7 @@ class AbstractSession(object):
 
     # Protect enumeration constant(s) defined in this class and in classes
     # derived from this class from changes:
-    __metaclass__ = utils.MetaClassForClassesWithEnums
-
+    
 __copyright__ = """
 Copyright 2012. Bloomberg Finance L.P.
 

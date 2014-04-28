@@ -4,7 +4,7 @@ import blpapi
 import datetime
 import time
 import traceback
-import thread
+import _thread
 import weakref
 from optparse import OptionParser, OptionValueError
 from blpapi import Event as EventType
@@ -113,14 +113,14 @@ def authorize(authService, identity, session, cid):
     if ev.eventType() == blpapi.Event.TOKEN_STATUS or \
             ev.eventType() == blpapi.Event.REQUEST_STATUS:
         for msg in ev:
-            print msg
+            print(msg)
             if msg.messageType() == TOKEN_SUCCESS:
                 token = msg.getElementAsString(TOKEN)
             elif msg.messageType() == TOKEN_FAILURE:
                 break
 
     if not token:
-        print "Failed to get token"
+        print("Failed to get token")
         return False
 
     # Create and fill the authorithation request
@@ -139,10 +139,10 @@ def authorize(authService, identity, session, cid):
             event.eventType() == blpapi.Event.REQUEST_STATUS or \
                 event.eventType() == blpapi.Event.PARTIAL_RESPONSE:
             for msg in event:
-                print msg
+                print(msg)
                 if msg.messageType() == AUTHORIZATION_SUCCESS:
                     return True
-                print "Authorization failed"
+                print("Authorization failed")
                 return False
 
         endTime = datetime.datetime.today()
@@ -170,13 +170,13 @@ def main():
     # so only try to connect to each server once.
     sessionOptions.setNumStartAttempts(1 if len(options.hosts) > 1 else 1000)
 
-    print "Connecting to port %d on %s" % (
-        options.port, ", ".join(options.hosts))
+    print("Connecting to port %d on %s" % (
+        options.port, ", ".join(options.hosts)))
 
     session = blpapi.Session(sessionOptions)
 
     if not session.start():
-        print "Failed to start session."
+        print("Failed to start session.")
         return
 
     subscriptionIdentity = session.createIdentity()
@@ -190,7 +190,7 @@ def main():
                 authService, subscriptionIdentity, session,
                 blpapi.CorrelationId("auth"))
         if not isAuthorized:
-            print "No authorization"
+            print("No authorization")
             return
 
     subscriptions = blpapi.SubscriptionList()
@@ -211,9 +211,9 @@ def main():
             for msg in event:
                 if event.eventType() == blpapi.Event.SUBSCRIPTION_STATUS or \
                         event.eventType() == blpapi.Event.SUBSCRIPTION_DATA:
-                    print "%s - %s" % (msg.correlationIds()[0].value(), msg)
+                    print("%s - %s" % (msg.correlationIds()[0].value(), msg))
                 else:
-                    print msg
+                    print(msg)
             if event.eventType() == blpapi.Event.SUBSCRIPTION_DATA:
                 eventCount += 1
                 if eventCount >= options.maxEvents:
@@ -223,11 +223,11 @@ def main():
 
 
 if __name__ == "__main__":
-    print "LocalMktdataSubscriptionExample"
+    print("LocalMktdataSubscriptionExample")
     try:
         main()
     except KeyboardInterrupt:
-        print "Ctrl+C pressed. Stopping..."
+        print("Ctrl+C pressed. Stopping...")
 
 __copyright__ = """
 Copyright 2012. Bloomberg Finance L.P.

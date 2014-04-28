@@ -5,7 +5,7 @@
 This component provides a topic that is used for publishing data on.
 """
 
-from __future__ import absolute_import
+
 
 from .exception import _ExceptionUtil
 from .message import Message

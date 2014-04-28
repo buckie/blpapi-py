@@ -5,7 +5,7 @@
 This component adds messages to an Event which can be later published.
 """
 
-from __future__ import absolute_import
+
 
 from .exception import _ExceptionUtil
 from .datetime import _DatetimeUtil
@@ -79,7 +79,7 @@ class EventFormatter(object):
             return EventFormatter.__stringTraits
         elif isinstance(value, bool):
             return EventFormatter.__boolTraits
-        elif isinstance(value, (int, long)):
+        elif isinstance(value, int):
             if value >= -(2 ** 31) and value <= (2 ** 31 - 1):
                 return EventFormatter.__int32Traits
             elif value >= -(2 ** 63) and value <= (2 ** 63 - 1):

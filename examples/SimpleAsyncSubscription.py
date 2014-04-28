@@ -3,7 +3,7 @@
 import blpapi
 import time
 import traceback
-import thread
+import _thread
 import weakref
 from optparse import OptionParser
 from blpapi import Event as EventType
@@ -67,11 +67,11 @@ def topicName(security):
 
 
 def printMessage(msg, eventType):
-    print "#{0} msg received: [{1}] => {2}/{3}".format(
-        thread.get_ident(),
+    print("#{0} msg received: [{1}] => {2}/{3}".format(
+        _thread.get_ident(),
         ", ".join(map(str, msg.correlationIds())),
         EVENT_TYPE_NAMES[eventType],
-        msg)
+        msg))
 
 
 def parseCmdLine():
@@ -136,7 +136,7 @@ def subscribe(session, options, identity=None):
     for s in options.securities:
         topic = topicName(s)
         cid = blpapi.CorrelationId(s)
-        print "Subscribing {0} => {1}".format(cid, topic)
+        print("Subscribing {0} => {1}".format(cid, topic))
         sl.add(topic, options.fields, correlationId=cid)
     session.subscribe(sl, identity)
 
@@ -200,9 +200,9 @@ def processEvent(event, session):
                     # Authorization failed, raise exception to exit
                     raise Error("Failed to pass authorization")
     except Error as ex:
-        print "Error in event handler:", ex
+        print("Error in event handler:", ex)
         # Interrupt a "sleep loop" in main thread
-        thread.interrupt_main()
+        _thread.interrupt_main()
 
 
 def main():
@@ -242,11 +242,11 @@ def main():
 
 
 if __name__ == "__main__":
-    print "SimpleAsyncSubscription"
+    print("SimpleAsyncSubscription")
     try:
         main()
     except KeyboardInterrupt:
-        print "Ctrl+C pressed. Stopping..."
+        print("Ctrl+C pressed. Stopping...")
 
 __copyright__ = """
 Copyright 2012. Bloomberg Finance L.P.

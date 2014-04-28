@@ -7,7 +7,7 @@ This file defines these classes:
 
 """
 
-from __future__ import absolute_import
+
 
 from .exception import _ExceptionUtil
 from .exception import UnsupportedOperationException
@@ -133,7 +133,7 @@ class Element(object):
             return Element.__stringTraits
         elif isinstance(value, bool):
             return Element.__boolTraits
-        elif isinstance(value, (int, long)):
+        elif isinstance(value, int):
             if value >= -(2 ** 31) and value <= (2 ** 31 - 1):
                 return Element.__int32Traits
             elif value >= -(2 ** 63) and value <= (2 ** 63 - 1):
@@ -322,7 +322,7 @@ class Element(object):
 
         """
 
-        if not isinstance(nameOrIndex, (int, long)):
+        if not isinstance(nameOrIndex, int):
             self.__assertIsValid()
             name = getNamePair(nameOrIndex)
             res = internals.blpapi_Element_getElement(self.__handle,

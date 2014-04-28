@@ -8,7 +8,7 @@ publishing like 'registerService', 'createTopics' and 'publish'.
 """
 
 
-from __future__ import absolute_import
+
 
 import weakref
 import sys
@@ -26,7 +26,7 @@ from .topic import Topic
 from . import utils
 
 
-class ServiceRegistrationOptions(object):
+class ServiceRegistrationOptions(object, metaclass=utils.MetaClassForClassesWithEnums):
     """Contains the options which can be specified when registering a service.
 
     To use non-default options to registerService, create a
@@ -38,10 +38,6 @@ class ServiceRegistrationOptions(object):
     PRIORITY_MEDIUM = \
         internals.SERVICEREGISTRATIONOPTIONS_PRIORITY_MEDIUM
     PRIORITY_HIGH = internals.SERVICEREGISTRATIONOPTIONS_PRIORITY_HIGH
-
-    # Protect enumeration constant(s) defined in this class and in classes
-    # derived from this class from changes:
-    __metaclass__ = utils.MetaClassForClassesWithEnums
 
     def __init__(self):
         """Create ServiceRegistrationOptions with default options."""
@@ -95,7 +91,7 @@ class ServiceRegistrationOptions(object):
         return self.__handle
 
 
-class ProviderSession(AbstractSession):
+class ProviderSession(AbstractSession, metaclass=utils.MetaClassForClassesWithEnums):
     """This class provides a session that can be used for providing services.
 
     It inherits from AbstractSession. In addition to the AbstractSession
@@ -123,10 +119,6 @@ class ProviderSession(AbstractSession):
     __handle = None
     __handlerProxy = None
 
-    # Protect enumeration constant(s) defined in this class and in classes
-    # derived from this class from changes:
-    __metaclass__ = utils.MetaClassForClassesWithEnums
-
     @staticmethod
     def __dispatchEvent(sessionRef, eventHandle):
         try:
@@ -135,7 +127,7 @@ class ProviderSession(AbstractSession):
                 event = Event(eventHandle, session)
                 session.__handler(event, session)
         except:
-            print >> sys.stderr, "Exception in event handler:"
+            print("Exception in event handler:", file=sys.stderr)
             traceback.print_exc(file=sys.stderr)
             os._exit(1)
 

@@ -7,7 +7,7 @@ to the entitlements.
 """
 
 
-from __future__ import absolute_import
+
 
 from .element import Element
 from .exception import _ExceptionUtil
@@ -15,7 +15,7 @@ from . import internals
 from . import utils
 
 
-class Identity(object):
+class Identity(object, metaclass=utils.MetaClassForClassesWithEnums):
     """Provides access to the entitlements for a specific user.
 
     An unauthorized Identity is created using Session.createIdentity(). Once
@@ -133,7 +133,7 @@ class Identity(object):
                 failedEIDs,
                 failedEIDsSize)
         result = []
-        for i in xrange(failedEIDsSize[0]):
+        for i in range(failedEIDsSize[0]):
             result.append(failedEIDs[i])
         return (True if res else False, result)
 
@@ -161,8 +161,7 @@ class Identity(object):
 
     # Protect enumeration constant(s) defined in this class and in classes
     # derived from this class from changes:
-    __metaclass__ = utils.MetaClassForClassesWithEnums
-
+    
 __copyright__ = """
 Copyright 2012. Bloomberg Finance L.P.
 

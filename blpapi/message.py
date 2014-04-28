@@ -7,7 +7,7 @@ inside an event and containing elements.
 
 """
 
-from __future__ import absolute_import
+
 
 from .element import Element
 from .name import Name
@@ -99,7 +99,7 @@ class Message(object):
         """
 
         res = []
-        for i in xrange(
+        for i in range(
                 internals.blpapi_Message_numCorrelationIds(self.__handle)):
             res.append(
                 internals.blpapi_Message_correlationId(self.__handle, i))

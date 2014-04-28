@@ -7,7 +7,7 @@ Session.
 
 """
 
-from __future__ import absolute_import
+
 
 from .element import Element
 from . import internals

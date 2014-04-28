@@ -5,7 +5,7 @@
 This component implements a list of topics which require topic creation.
 """
 
-from __future__ import absolute_import
+
 
 from .exception import _ExceptionUtil
 from .message import Message
@@ -15,7 +15,7 @@ from . import utils
 from .internals import CorrelationId
 
 
-class TopicList(object):
+class TopicList(object, metaclass=utils.MetaClassForClassesWithEnums):
     """A list of topics which require creation.
 
     Contains a list of topics which require creation.
@@ -25,10 +25,6 @@ class TopicList(object):
     This is passed to a createTopics() call or createTopicsAsync() call on a
     ProviderSession. It is updated and returned by the createTopics() call.
     """
-
-    # Protect enumeration constant(s) defined in this class and in classes
-    # derived from this class from changes:
-    __metaclass__ = utils.MetaClassForClassesWithEnums
 
     NOT_CREATED = internals.TOPICLIST_NOT_CREATED
     CREATED = internals.TOPICLIST_CREATED

@@ -11,13 +11,7 @@ from sys import version
 from sys import platform
 
 if version < '2.6':
-    raise Exception(
-        "Python versions before 2.6 are not supported (current version is " +
-	version + ")")
-if version >= '3.0':
-    raise Exception(
-        "Python 3 is not supported (current version is " + version +
-        ")")
+    raise Exception("Python versions before 2.6 are not supported (current version is " + version + ")")
 
 if not ('BLPAPI_ROOT' in os.environ):
     raise Exception("BLPAPI_ROOT environment variable isn't defined")

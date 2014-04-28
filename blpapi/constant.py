@@ -10,7 +10,7 @@ This component provides a representation of a schema enumeration constant, and
 a representation for lists of such constants
 """
 
-from __future__ import absolute_import
+
 
 from .exception import _ExceptionUtil, NotFoundException, \
     IndexOutOfRangeException
