@@ -64,7 +64,7 @@ class MetaClassForClassesWithEnums(type):
         Raise EnumError exception otherwise.
         """
         if name.isupper() and name in mcs.__dict__:
-            raise mcs.EnumError, "Can't change value of enum %s" % name
+            raise mcs.EnumError("Can't change value of enum %s" % name)
         else:
             type.__setattr__(mcs, name, value)
 
@@ -74,7 +74,7 @@ class MetaClassForClassesWithEnums(type):
         Raise EnumError exception otherwise.
         """
         if name.isupper() and name in mcs.__dict__:
-            raise mcs.EnumError, "Can't unbind enum %s" % name
+            raise mcs.EnumError("Can't unbind enum %s" % name)
         else:
             type.__delattr__(mcs, name)
 
