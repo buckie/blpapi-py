@@ -6,7 +6,7 @@ This component provides a list of subscriptions for subscribing and
 unsubscribing.
 """
 
-from __future__ import absolute_import
+
 
 from .exception import _ExceptionUtil
 from . import internals
@@ -49,18 +49,17 @@ class SubscriptionList(object):
         if topic is None:
             topic = ""
         if (fields is not None) and (not isinstance(fields, str)):
-            if isinstance(fields, unicode):
+            if isinstance(fields, str):
                 raise TypeError("unicode strings are not currently supported")
             fields = ",".join(fields)
         if (options is not None) and (not isinstance(options, str)):
-            if isinstance(options, unicode):
+            if isinstance(options, str):
                 raise TypeError("unicode strings are not currently supported")
             if isinstance(options, (list, tuple)):
                 options = "&".join(options)
             else:
-                options = "&".join(map(
-                    lambda x: x[0] if x[1]
-                    is None else x[0] + "=" + str(x[1]), options.iteritems()))
+                options = "&".join([x[0] if x[1]
+                    is None else x[0] + "=" + str(x[1]) for x in iter(options.items())])
         return internals.blpapi_SubscriptionList_addHelper(
             self.__handle,
             topic,

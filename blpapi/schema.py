@@ -18,7 +18,7 @@ permitted to be associated with that identifier.
 
 """
 
-from __future__ import absolute_import
+
 
 from .exception import NotFoundException, IndexOutOfRangeException
 from .name import Name, getNamePair
@@ -27,7 +27,7 @@ from . import utils
 from . import internals
 
 
-class SchemaStatus(object):
+class SchemaStatus(object, metaclass=utils.MetaClassForClassesWithEnums):
     """The possible deprecation statuses of a schema element or type.
 
     Class attributes:
@@ -51,12 +51,8 @@ class SchemaStatus(object):
     PENDING_DEPRECATION = internals.STATUS_PENDING_DEPRECATION
     """This item is expected to be deprecated in the future"""
 
-    # Protect enumeration constant(s) defined in this class and in classes
-    # derived from this class from changes:
-    __metaclass__ = utils.MetaClassForClassesWithEnums
 
-
-class SchemaElementDefinition(object):
+class SchemaElementDefinition(object, metaclass=utils.MetaClassForClassesWithEnums):
     """The definition of an individual field within a schema type.
 
     This class implements the definition of an individual field within a schema
@@ -178,7 +174,7 @@ class SchemaElementDefinition(object):
         numAlternateNames = \
             internals.blpapi_SchemaElementDefinition_numAlternateNames(
                 self.__handle)
-        for i in xrange(numAlternateNames):
+        for i in range(numAlternateNames):
             res.append(Name._createInternally(
                 internals.blpapi_SchemaElementDefinition_getAlternateName(
                     self.__handle,
@@ -209,8 +205,7 @@ class SchemaElementDefinition(object):
 
     # Protect enumeration constant(s) defined in this class and in classes
     # derived from this class from changes:
-    __metaclass__ = utils.MetaClassForClassesWithEnums
-
+    
 
 class SchemaTypeDefinition(object):
 
@@ -351,7 +346,7 @@ class SchemaTypeDefinition(object):
 
         """
 
-        if not isinstance(nameOrIndex, (int, long)):
+        if not isinstance(nameOrIndex, int):
             name = nameOrIndex
             names = getNamePair(name)
             res = internals.blpapi_SchemaTypeDefinition_getElementDefinition(

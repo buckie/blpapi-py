@@ -6,7 +6,7 @@ This component implements a consumer session for getting services.
 """
 
 
-from __future__ import absolute_import
+
 
 import weakref
 import sys

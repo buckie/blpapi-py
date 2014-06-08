@@ -6,13 +6,13 @@ This file defines these classes:
     'DataType' - "enum" representing all possible data types in an Element.
 """
 
-from __future__ import absolute_import
+
 
 from . import internals
 from . import utils
 
 
-class DataType:
+class DataType(metaclass=utils.MetaClassForClassesWithEnums):
     """Contains the possible data types which can be represented in an Element.
 
     Class attributes:
@@ -69,10 +69,6 @@ class DataType:
     """Choice type"""
     CORRELATION_ID = internals.DATATYPE_CORRELATION_ID
     """Used for some internal messages"""
-
-    # Protect enumeration constant(s) defined in this class and in classes
-    # derived from this class from changes:
-    __metaclass__ = utils.MetaClassForClassesWithEnums
 
 __copyright__ = """
 Copyright 2012. Bloomberg Finance L.P.

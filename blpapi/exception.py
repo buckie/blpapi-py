@@ -5,9 +5,9 @@
 This file defines various exceptions that blpapi can raise.
 """
 
-from __future__ import absolute_import
 
-from __builtin__ import Exception as _StandardException
+
+from builtins import Exception as _StandardException
 from . import internals
 
 

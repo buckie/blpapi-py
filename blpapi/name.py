@@ -7,7 +7,7 @@ form for efficient string comparison.
 
 """
 
-from __future__ import absolute_import
+
 
 from . import internals
 
@@ -97,7 +97,7 @@ class Name(object):
                 return 0 != internals.blpapi_Name_equalsStr(self.__handle,
                                                             other)
             else:
-                if isinstance(other, unicode):
+                if isinstance(other, str):
                     raise TypeError(
                         "unicode strings are not currently supported")
                 return self.__handle == other.__handle
@@ -111,7 +111,7 @@ class Name(object):
 
     def __hash__(self):
         """x.__hash__() <==> hash(x)"""
-        return long(self.__handle)
+        return int(self.__handle)
 
     def _handle(self):
         return self.__handle

@@ -33,7 +33,7 @@ Synchronously read the response 'event' and parse over messages using 'token'
 
 """
 
-from __future__ import absolute_import
+
 
 from .message import Message
 from . import internals
@@ -63,7 +63,7 @@ class MessageIterator(object):
     def __iter__(self):
         return self
 
-    def next(self):
+    def __next__(self):
         retCode, message = internals.blpapi_MessageIterator_next(self.__handle)
         if retCode:
             raise StopIteration()
@@ -71,7 +71,7 @@ class MessageIterator(object):
             return Message(message, self.__event)
 
 
-class Event(object):
+class Event(object, metaclass=utils.MetaClassForClassesWithEnums):
     """A single event resulting from a subscription or a request.
 
     'Event' objects are created by the API and passed to the application either
@@ -168,8 +168,7 @@ class Event(object):
 
     # Protect enumeration constant(s) defined in this class and in classes
     # derived from this class from changes:
-    __metaclass__ = utils.MetaClassForClassesWithEnums
-
+    
 
 class EventQueue(object):
     """A construct used to handle replies to request synchronously.

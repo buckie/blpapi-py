@@ -9,7 +9,7 @@ provider service (can generate API data) or a consumer service.
 """
 
 
-from __future__ import absolute_import
+
 
 from .event import Event
 from .name import getNamePair
@@ -214,7 +214,7 @@ class Service(object):
 
         """
 
-        if not isinstance(nameOrIndex, (int, long)):
+        if not isinstance(nameOrIndex, int):
             names = getNamePair(nameOrIndex)
             errCode, operation = internals.blpapi_Service_getOperation(
                 self.__handle, names[0], names[1])
@@ -263,7 +263,7 @@ class Service(object):
 
         """
 
-        if not isinstance(nameOrIndex, (int, long)):
+        if not isinstance(nameOrIndex, int):
             names = getNamePair(nameOrIndex)
             errCode, definition = internals.blpapi_Service_getEventDefinition(
                 self.__handle,

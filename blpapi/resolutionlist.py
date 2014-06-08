@@ -5,7 +5,7 @@
 This component implements a list of topics that require resolution.
 """
 
-from __future__ import absolute_import
+
 
 from .element import Element
 from .exception import _ExceptionUtil
@@ -16,17 +16,13 @@ from . import utils
 from .internals import CorrelationId
 
 
-class ResolutionList(object):
+class ResolutionList(object, metaclass=utils.MetaClassForClassesWithEnums):
     """Contains a list of topics that require resolution.
 
     Created from topic strings or from SUBSCRIPTION_STARTED messages. This is
     passed to a resolve() call or resolveAsync() call on a ProviderSession. It
     is updated and returned by the resolve() call.
     """
-
-    # Protect enumeration constant(s) defined in this class and in classes
-    # derived from this class from changes:
-    __metaclass__ = utils.MetaClassForClassesWithEnums
 
     UNRESOLVED = internals.RESOLUTIONLIST_UNRESOLVED
     RESOLVED = internals.RESOLUTIONLIST_RESOLVED
@@ -107,7 +103,7 @@ class ResolutionList(object):
         """
         if isinstance(attribute, str):
             attribute = Name(attribute)
-        if isinstance(attribute, unicode):
+        if isinstance(attribute, str):
             raise TypeError("unicode strings are not currently supported")
         return internals.blpapi_ResolutionList_addAttribute(
             self.__handle, attribute._handle())
@@ -196,7 +192,7 @@ class ResolutionList(object):
         """
         if isinstance(attribute, str):
             attribute = Name(attribute)
-        if isinstance(attribute, unicode):
+        if isinstance(attribute, str):
             raise TypeError("unicode strings are not currently supported")
         errorCode, element = internals.blpapi_ResolutionList_attribute(
             self.__handle,
@@ -218,7 +214,7 @@ class ResolutionList(object):
         """
         if isinstance(attribute, str):
             attribute = Name(attribute)
-        if isinstance(attribute, unicode):
+        if isinstance(attribute, str):
             raise TypeError("unicode strings are not currently supported")
         errorCode, element = internals.blpapi_ResolutionList_attributeAt(
             self.__handle,

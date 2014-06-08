@@ -2,7 +2,7 @@
 
 """Utilities that deal with blpapi.Datetime data type"""
 
-from __future__ import absolute_import
+
 
 from . import internals
 from . import utils
@@ -10,7 +10,7 @@ from . import utils
 import datetime as _dt
 
 
-class FixedOffset(_dt.tzinfo):
+class FixedOffset(_dt.tzinfo, metaclass=utils.MetaClassForClassesWithEnums):
     """Time zone information.
 
     Represents time zone information to be used with Python standard library
@@ -65,8 +65,7 @@ class FixedOffset(_dt.tzinfo):
 
     # Protect enumeration constant(s) defined in this class and in classes
     # derived from this class from changes:
-    __metaclass__ = utils.MetaClassForClassesWithEnums
-
+    
 
 class _DatetimeUtil(object):
     """Utility methods that deal with BLPAPI dates and times."""
