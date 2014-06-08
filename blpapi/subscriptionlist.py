@@ -48,12 +48,19 @@ class SubscriptionList(object):
             correlationId = CorrelationId()
         if topic is None:
             topic = ""
-        if (fields is not None) and (not isinstance(fields, str)):
+        try:
             if isinstance(fields, str):
+                fields = fields.encode('ascii')
+            if isinstance(options, str):
+                options = options.encode('ascii')
+        except UnicodeEncodeError:
+            raise TypeError("unicode strings are not currently supported")
+        if (fields is not None) and (not isinstance(fields, str)):
+            if isinstance(fields, bytes):
                 raise TypeError("unicode strings are not currently supported")
             fields = ",".join(fields)
         if (options is not None) and (not isinstance(options, str)):
-            if isinstance(options, str):
+            if isinstance(options, bytes):
                 raise TypeError("unicode strings are not currently supported")
             if isinstance(options, (list, tuple)):
                 options = "&".join(options)

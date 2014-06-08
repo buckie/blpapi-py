@@ -10,14 +10,10 @@ import platform as plat
 from sys import version
 from sys import platform
 
-if version < '2.6':
+if version < '3.0':
     raise Exception(
-        "Python versions before 2.6 are not supported (current version is " +
+        "Python versions before 3.0 are not supported (current version is " +
 	version + ")")
-if version >= '3.0':
-    raise Exception(
-        "Python 3 is not supported (current version is " + version +
-        ")")
 
 if not ('BLPAPI_ROOT' in os.environ):
     raise Exception("BLPAPI_ROOT environment variable isn't defined")
@@ -61,9 +57,9 @@ blpapi_wrap = Extension(
 
 setup(
     name='blpapi',
-    version='3.5.5',
+    version='4.0.0',
     author='Bloomberg L.P.',
-    description='Python SDK for Bloomberg BLPAPI (3.5.5)',
+    description='Python 3k SDK for Bloomberg BLPAPI (4.0.0)',
     ext_modules=[blpapi_wrap],
     url='http://open.bloomberg.com/',
     packages=["blpapi"],

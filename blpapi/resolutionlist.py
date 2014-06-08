@@ -102,8 +102,12 @@ class ResolutionList(object, metaclass=utils.MetaClassForClassesWithEnums):
         success or a negative number on failure.
         """
         if isinstance(attribute, str):
+            try:
+                attribute = attribute.encode('ascii')
+            except UnicodeEncodeError:
+                raise TypeError("unicode strings are not currently supported")
             attribute = Name(attribute)
-        if isinstance(attribute, str):
+        if isinstance(attribute, bytes):
             raise TypeError("unicode strings are not currently supported")
         return internals.blpapi_ResolutionList_addAttribute(
             self.__handle, attribute._handle())
@@ -191,8 +195,12 @@ class ResolutionList(object, metaclass=utils.MetaClassForClassesWithEnums):
         'correlationId' is not RESOLVED an exception is raised.
         """
         if isinstance(attribute, str):
+            try:
+                attribute = attribute.encode('ascii')
+            except UnicodeEncodeError:
+                raise TypeError("unicode strings are not currently supported")
             attribute = Name(attribute)
-        if isinstance(attribute, str):
+        if isinstance(attribute, bytes):
             raise TypeError("unicode strings are not currently supported")
         errorCode, element = internals.blpapi_ResolutionList_attribute(
             self.__handle,
@@ -213,8 +221,12 @@ class ResolutionList(object, metaclass=utils.MetaClassForClassesWithEnums):
         RESOLVED an exception is raised.
         """
         if isinstance(attribute, str):
+            try:
+                attribute = attribute.encode('ascii')
+            except UnicodeEncodeError:
+                raise TypeError("unicode strings are not currently supported")
             attribute = Name(attribute)
-        if isinstance(attribute, str):
+        if isinstance(attribute, bytes):
             raise TypeError("unicode strings are not currently supported")
         errorCode, element = internals.blpapi_ResolutionList_attributeAt(
             self.__handle,

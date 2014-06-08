@@ -94,10 +94,14 @@ class Name(object):
         """x.__eq__(y) <==> x==y"""
         try:
             if isinstance(other, str):
+                try:
+                    other = other.encode('ascii')
+                except UnicodeEncodeError:
+                    raise TypeError("unicode strings are not currently supported")
                 return 0 != internals.blpapi_Name_equalsStr(self.__handle,
-                                                            other)
+                                                        other)
             else:
-                if isinstance(other, str):
+                if isinstance(other, bytes):
                     raise TypeError(
                         "unicode strings are not currently supported")
                 return self.__handle == other.__handle
